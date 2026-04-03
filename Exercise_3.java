@@ -3,8 +3,10 @@ import java.io.*;
 // Java program to implement
 // a Singly Linked List
 class LinkedList {
-
+    // Time Complexity: o(1) // Reduce from o(N) to o(1) by introducing tail
+    // Space Complexity: o(N) where N being size of the data;
     Node head; // head of list
+    Node tail; // Tail of the list to improve insertion
 
     // Linked list Node.
     // This inner class is made static
@@ -33,15 +35,13 @@ class LinkedList {
         // then make the new node as head
         if (list.head == null) {
             list.head = newNode;
+            // first node is both head and tail
+            list.tail = newNode;
         } else {
-            // Else traverse till the last node
-            // and insert the new_node there
-            Node last = list.head;
-            while (last.next != null) {
-                last = last.next;
-            }
-            // Insert the new_node at last node
-            last.next = newNode;
+            // link to end
+            list.tail.next = newNode;
+            // advance tail
+            list.tail = newNode;
         }
         // Return the list by head
         return list;
